@@ -9,7 +9,14 @@ class CartsController < ApplicationController
 
 	def checkout
 		#needs to access line items from the current cart
-		#needs to take the quanities of each line item, and subtract them from the corresponding item's inventory
+		cart = current_user.current_cart
+		cart.line_items.each do |line_item|
+			#needs to take the quanities of each line item, and subtract them from the corresponding item's inventory
+			
+			line_item.item.inventory -= line_item.quantity
+			line_item.item.save
+		end
+		
 		#needs to set current cart to nil
 		current_user.current_cart_id = nil
 		current_user.save

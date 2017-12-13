@@ -17,7 +17,7 @@ class LineItemsController < ApplicationController
 		end
 
 		cart = current_user.current_cart
-		new_line_item = cart.add_item(line_item_params[:item_id])
+		new_line_item = cart.add_item(params[:item_id])
 		new_line_item.save
 		# binding.pry
 
@@ -25,11 +25,6 @@ class LineItemsController < ApplicationController
 		
 	end
 
-	private
-
-	def line_item_params
-		params.require(:item).permit(:item_id)
-
-	end
+	
 
 end

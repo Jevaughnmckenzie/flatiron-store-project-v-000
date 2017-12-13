@@ -11,10 +11,14 @@ class User < ActiveRecord::Base
   # attr_writer :current_cart
 
   def current_cart=(cart)
-  	self.current_cart_id = cart.id
-  	unless save
-  		raise "Cart ID didn't save for some reason".inspect
-  	end
+  	if cart.nil?
+      self.current_cart_id = nil
+    else
+      self.current_cart_id = cart.id
+      unless save
+        raise "Cart ID didn't save for some reason".inspect
+      end
+    end
   end
 
   def current_cart
