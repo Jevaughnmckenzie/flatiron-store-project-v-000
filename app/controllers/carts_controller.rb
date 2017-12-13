@@ -16,7 +16,8 @@ class CartsController < ApplicationController
 			line_item.item.inventory -= line_item.quantity
 			line_item.item.save
 		end
-		
+		cart.status = "submitted"
+		cart.save
 		#needs to set current cart to nil
 		current_user.current_cart_id = nil
 		current_user.save
