@@ -17,8 +17,9 @@ class LineItemsController < ApplicationController
 		end
 
 		cart = current_user.current_cart
-		cart.add_item(line_item_params[:item_id])
-		cart.save
+		new_line_item = cart.add_item(line_item_params[:item_id])
+		new_line_item.save
+		# binding.pry
 
 		redirect_to cart_path(cart)
 		
